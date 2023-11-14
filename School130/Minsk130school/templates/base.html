@@ -1,0 +1,583 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="og:url" content="http://127.0.0.1:8000/school130/home/">
+    <meta property="og:title" content="Средняя школа №130| Минск | Платформа образовательного учреждения">
+    <meta property="description"  content="Хорошие учителя создают хороших учеников">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="http://127.0.0.1:8000/static/Minsk130school/img/label.png">
+    <link rel="canonical" href="http://127.0.0.1:8000/school130/home/">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">  <!--Montserrat - это название шрифта, а числа 100,200,300,400,500,600,700,800,900 различные варианты (толщины) шрифта-->
+    <link rel="icon" href="{% static 'Minsk130school/img/icon.png' %}" sizes="60x60" type="image/jpg">
+
+    {% block title %}<title>Средняя школа №130 | Минск | Платформа образовательного учреждения</title>{% endblock %}
+    
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'Minsk130school/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Additional CSS Files -->  
+    <link rel="stylesheet" href="{% static 'Minsk130school/assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'Minsk130school/assets/css/templatemo-grad-school.css' %}">
+    <link rel="stylesheet" href="{% static 'Minsk130school/assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'Minsk130school/assets/css/lightbox.css' %}">
+<!--
+    
+TemplateMo 557 Grad School
+
+https://templatemo.com/tm-557-grad-school
+
+-->
+  </head>
+
+<body>
+
+   
+  <!--header-->
+  <header class="main-header clearfix" role="header">
+    <div class="logo">
+      <a href="#"><em>Школа им.</em> Рут Уоллер</a>
+    </div>
+    <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
+    <nav id="menu" class="main-nav" role="navigation">
+      <ul class="main-menu">
+        <li><a href="#section1">Главная</a></li>
+        <li><a href="#section4">Платные образовательные услуги</a></li>
+        <li class="has-submenu"><a href="#section2">О нас</a>
+          <ul class="sub-menu">
+            <li><a href="#section2">Кто мы?</a></li>
+            <li><a href="#section3">Чем занимаемся?</a></li>
+            <li><a href="#section3">Как это работает?</a></li>
+            <li><a href="https://adu.by/images/2023/obr/obr-standarty-ob-sred-obrazovaniya.pdf" rel="sponsored" class="external">Стандарты и требования</a></li>
+          </ul>
+        </li>
+        
+        <!-- <li><a href="#section5">Video</a></li> -->
+        <li><a href="#section6">Контакты</a></li>
+        <li><a href="https://adu.by/images/2023/obr/obr-standarty-ob-sred-obrazovaniya.pdf" rel="sponsored" class="external">Стандарты и требования</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ***** Main Banner Area Start ***** -->
+  <section class="section main-banner" id="top" data-section="section1">
+      <video autoplay muted loop id="bg-video">
+          <source src="{% static 'Minsk130school/assets/images/course-video.mp4' type="video/mp4" /%}">
+      </video>
+
+      <div class="video-overlay header-text">
+          <div class="caption">
+              <h6>Школа №130 г.Минска имени Рут Уоллер</h6>
+              <h2><em>Твоя</em> Школа</h2>
+              <div class="main-button">
+                  <div class="scroll-to-section"><a href="#section2">Узнай больше</a></div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- ***** Main Banner Area End ***** -->
+
+
+  <section class="features">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-12">
+          <div class="features-post">
+            <div class="features-content">
+              <div class="content-show">
+                <h4><i class="fa fa-pencil"></i>Новости</h4>
+              </div>
+              <div class="content-hide">
+                <p>Размещение развёрнутых материалов о прошедших, состоявшихся событиях.</p>
+                <p class="hidden-sm">Curabitur id eros vehicula, tincidunt libero eu, lobortis mi. In mollis eros a posuere imperdiet.</p>
+                <div class="scroll-to-section"><a href="#section2">Информация</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-12">
+          <div class="features-post second-features">
+            <div class="features-content">
+              <div class="content-show">
+                <h4><i class="fa fa-graduation-cap"></i>Преподаватели</h4>
+              </div>
+              <div class="content-hide">
+                <p>Чтобы быть хорошим преподавателем, нужно любить то, что преподаешь, и любить тех, кому преподаешь. Учитель — это человек, который выращивает две мысли там, где раньше росла одна.</p>
+                <p class="hidden-sm">Чтобы быть хорошим преподавателем, нужно любить то, что преподаешь, и любить тех, кому преподаешь. Учитель — это человек, который выращивает две мысли там, где раньше росла одна.</p>
+                <div class="scroll-to-section"><a href="#section3">Подробнее</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-12">
+          <div class="features-post third-features">
+            <div class="features-content">
+              <div class="content-show">
+                <h4><i class="fa fa-book"></i>Платные Кружки</h4>
+              </div>
+              <div class="content-hide">
+                <p>Деятельность по интересам это возможность развиваться в интересной для себя области, получить дополнительные знания, развивать навыки командной работы, чувство долга и ответственности; это возможность найти друзей, интересный круг общения, поддержать свою независимость и инициативность, и т.п.</p>
+                <p class="hidden-sm">это возможность развиваться в интересной для себя области, получить дополнительные знания, развивать навыки командной работы, чувство долга и ответственности; это возможность найти друзей, интересный круг общения, поддержать свою независимость и инициативность, и т.п.</p>
+                <div class="scroll-to-section"><a href="#section4">Читать Больше</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section why-us" data-section="section2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-heading">
+            <h2>Почему выбирают Школу им. Рут Уоллер?</h2>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div id='tabs'>
+            <ul>
+              <li><a href='#tabs-1'>Цели и задачи</a></li>
+              <li><a href='#tabs-2'>Школа успеха</a></li>
+              <li><a href='#tabs-3'>Школа развития</a></li>
+            </ul>
+            <section class='tabs-content'>
+              <article id='tabs-1'>
+                <div class="row">
+                  <div class="col-md-6">
+                    <img src="{% static 'Minsk130school/assets/images/choose-us-image-01.png' alt="" %}">
+                  </div>
+                  <div class="col-md-6">
+                    <h4>Цели и задачи</h4>
+                    <p>Цель: совершенствование образовательной среды, предоставляющей равные условия для раскрытия потенциала учащихся и их успешной 
+                      социализации.
+                      <br>
+                      Задачи:
+                      <br>
+                      Обеспечить повышение качества образования.
+                      <br>Повышение эффективности идеологической и воспитательной работы.
+                  </p>
+                  </div>
+                </div>
+              </article>
+              <article id='tabs-2'>
+                <div class="row">
+                  <div class="col-md-6">
+                    <img src="{% static 'Minsk130school/assets/images/choose-us-image-02.png' alt=""%}">
+                  </div>
+                  <div class="col-md-6">
+                    <h4>Школа успеха</h4>
+                    <p>Мы предлагаем детям принять участие в различных интеллектуальных конкурсах и спортивных соревнованиях.</p> 
+                    <p>Мы гордимся успехами наших учеников в республиканской олимпиаде по учебным предметам, в конкурсе исследовательских работ 
+                      учащихся и других конкурсах.</p>
+                  </div>
+                </div>
+              </article>
+              <article id='tabs-3'>
+                <div class="row">
+                  <div class="col-md-6">
+                    <img src="{% static 'Minsk130school/assets/images/choose-us-image-03.png' alt=""%}">
+                  </div>
+                  <div class="col-md-6">
+                    <h4>Школа развития</h4>
+                    <p>Занятия в объединениях по интересам (кружках, секциях) – отличный вариант организации досуга школьника, 
+                      так как позволяют развить творческие, спортивные, социальные способности ребенка, расширить сферу его интересов, 
+                      дают возможность сменить вид деятельности, отдохнуть и проявить себя. Здесь каждый школьник сможет найти себе занятие по душе, приобрести новых друзей и единомышленников, сделать свой досуг интересным и незабываемым.</p>
+                  </div>
+                </div>
+              </article>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section coming-soon" data-section="section3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7 col-xs-12">
+          <div class="continer centerIt">
+            <div>
+              <h4>Подать <em>заявку</em> на поступление</h4>
+              <div class="counter">
+
+                <div class="days">
+                  <div class="value">00</div>
+                  <span>Дни</span>
+                </div>
+
+                <div class="hours">
+                  <div class="value">00</div>
+                  <span>Часы</span>
+                </div>
+
+                <div class="minutes">
+                  <div class="value">00</div>
+                  <span>Минуты</span>
+                </div>
+
+                <div class="seconds">
+                  <div class="value">00</div>
+                  <span>Секунды</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="right-content">
+            <div class="top-content">
+              <h6>Заполните форму <em>заявки для поступления</em>  в нашу школу</h6>
+            </div>
+            <form id="contact" action="" method="get">
+              <div class="row">
+                <div class="col-md-12">
+                  <fieldset>
+                    <input name="name" type="text" class="form-control" id="name" placeholder="Your Name" required="">
+                  </fieldset>
+                </div>
+                <div class="col-md-12">
+                  <fieldset>
+                    <input name="email" type="text" class="form-control" id="email" placeholder="Your Email" required="">
+                  </fieldset>
+                </div>
+                <div class="col-md-12">
+                  <fieldset>
+                    <input name="phone-number" type="text" class="form-control" id="phone-number" placeholder="Your Phone Number" required="">
+                  </fieldset>
+                </div>
+                <div class="col-md-12">
+                  <fieldset>
+                    <button type="submit" id="form-submit" class="button">Get it now</button>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section courses" data-section="section4">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-heading">
+            <h2>Выберите кружок по интересам</h2>
+          </div>
+        </div>
+        <div class="owl-carousel owl-theme">
+          {% for course in courses %}
+          <div class="item">
+            <img src="{{ course.image.url }}" alt="{{ course.title }}">
+            <div class="down-content">
+              <h4>{{ course.title }}</h4>
+              <p>{{ course.description }}</p>
+              <div class="author-image">
+                <img src="assets/images/author-01.png" alt="Author 1">
+              </div>
+              <div class="text-button-pay">
+                <a href="#">Pay <i class="fa fa-angle-double-right"></i></a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          <!--<div class="item">
+            <img src="assets/images/courses-02.jpg" alt="Course #2">
+            <div class="down-content">
+              <h4>Business World</h4>
+              <p>Quisque cursus augue ut velit dictum, quis volutpat enim blandit. Maecenas a lectus ac ipsum porta.</p>
+              <div class="author-image">
+                <img src="assets/images/author-02.png" alt="Author 2">
+              </div>
+              <div class="text-button-free">
+                <a href="#">Free <i class="fa fa-angle-double-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/images/courses-03.jpg" alt="Course #3">
+            <div class="down-content">
+              <h4>Media Technology</h4>
+              <p>Pellentesque ultricies diam magna, auctor cursus lectus pretium nec. Maecenas finibus lobortis enim.</p>
+              <div class="author-image">
+                <img src="assets/images/author-03.png" alt="Author 3">
+              </div>
+              <div class="text-button-pay">
+                <a href="#">Pay <i class="fa fa-angle-double-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/images/courses-04.jpg" alt="Course #4">
+            <div class="down-content">
+              <h4>Communications</h4>
+              <p>Download free images and videos for your websites by visiting Unsplash, Pixabay, and Pexels.</p>
+              <div class="author-image">
+                <img src="assets/images/author-04.png" alt="Author 4">
+              </div>
+              <div class="text-button-free">
+                <a href="#">Free <i class="fa fa-angle-double-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/images/courses-05.jpg" alt="">
+            <div class="down-content">
+              <h4>Business Ethics</h4>
+              <p>Pellentesque ultricies diam magna, auctor cursus lectus pretium nec. Maecenas finibus lobortis enim.</p>
+              <div class="author-image">
+                <img src="assets/images/author-05.png" alt="">
+              </div>
+              <div class="text-button-pay">
+                <a href="#">Pay <i class="fa fa-angle-double-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/images/courses-01.jpg" alt="">
+            <div class="down-content">
+              <h4>Photography</h4>
+              <p>Quisque cursus augue ut velit dictum, quis volutpat enim blandit. Maecenas a lectus ac ipsum porta.</p>
+              <div class="author-image">
+                <img src="assets/images/author-01.png" alt="">
+              </div>
+              <div class="text-button-free">
+                <a href="#">Free <i class="fa fa-angle-double-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/images/courses-02.jpg" alt="">
+            <div class="down-content">
+              <h4>Web Development</h4>
+              <p>Pellentesque ultricies diam magna, auctor cursus lectus pretium nec. Maecenas finibus lobortis enim.</p>
+              <div class="author-image">
+                <img src="assets/images/author-02.png" alt="">
+              </div>
+              <div class="text-button-free">
+                <a href="#">Free <i class="fa fa-angle-double-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/images/courses-03.jpg" alt="">
+            <div class="down-content">
+              <h4>Learn HTML CSS</h4>
+              <p>You can get free images and videos for your websites by visiting Unsplash, Pixabay, and Pexels.</p>
+              <div class="author-image">
+                <img src="assets/images/author-03.png" alt="">
+              </div>
+              <div class="text-button-pay">
+                <a href="#">Pay <i class="fa fa-angle-double-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/images/courses-04.jpg" alt="">
+            <div class="down-content">
+              <h4>Social Media</h4>
+              <p>Pellentesque ultricies diam magna, auctor cursus lectus pretium nec. Maecenas finibus lobortis enim.</p>
+              <div class="author-image">
+                <img src="assets/images/author-04.png" alt="">
+              </div>
+              <div class="text-button-pay">
+                <a href="#">Pay <i class="fa fa-angle-double-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/images/courses-05.jpg" alt="">
+            <div class="down-content">
+              <h4>Digital Arts</h4>
+              <p>Quisque cursus augue ut velit dictum, quis volutpat enim blandit. Maecenas a lectus ac ipsum porta.</p>
+              <div class="author-image">
+                <img src="assets/images/author-05.png" alt="">
+              </div>
+              <div class="text-button-free">
+                <a href="#">Free <i class="fa fa-angle-double-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/images/courses-01.jpg" alt="">
+            <div class="down-content">
+              <h4>Media Streaming</h4>
+              <p>Pellentesque ultricies diam magna, auctor cursus lectus pretium nec. Maecenas finibus lobortis enim.</p>
+              <div class="author-image">
+                <img src="assets/images/author-01.png" alt="">
+              </div>
+              <div class="text-button-pay">
+                <a href="#">Pay <i class="fa fa-angle-double-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+    -->
+    </div>
+  </section>
+  
+
+  <section class="section video" data-section="section5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 align-self-center">
+          <div class="left-content">
+            <span>наша презентация для вас</span>
+            <h4>Посмотрите видео чтобы узнать больше <em>о Школе им. Рут Уоллер</em></h4>
+            <p>25 апреля 2016 года школе было присвоено имя  Рут Уоллер гражданки США, работавшей в Минске в 1946 году в рамках 
+              гуманитарной миссии UNRRА - Администрации помощи и восстановления Объединенных Наций. Это открыло перед школой перспективы 
+              международного сотрудничества.
+              
+              Был реализован инновационный проект "Внедрение модели Республиканского центра спортивной профориентации как компонента единого образовательного пространства в учреждениях образования.
+            <br><br>Школа №130 г. Минска была открыта 1 сентября 2004 года.</p>
+            <div class="main-button"><a rel="nofollow" href="https://t.me/sch130minsk" target="_parent">Mы в Telegram</a></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <article class="video-item">
+            <div class="video-caption">
+              <h4>Школа им. Рут Уоллер</h4>
+            </div>
+            <figure>
+              <a href="https://www.youtube.com/watch?v=1U55bO_2F20&t=11s" class="play"><img src="{% static 'Minsk130school/assets/images/main-thumb.png'%}"></a>
+            </figure>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact" data-section="section6">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-heading">
+            <h2>Будем на связи</h2>
+          </div>
+        </div>
+        <div class="col-md-6">
+        
+        <!-- Do you need a working HTML contact-form script?
+                	
+                    Please visit https://templatemo.com/contact page -->
+                    
+          <form id="contact" action="" method="post">
+            <div class="row">
+              <div class="col-md-6">
+                  <fieldset>
+                    <input name="name" type="text" class="form-control" id="name" placeholder="Ваше имя" required="">
+                  </fieldset>
+                </div>
+                <div class="col-md-6">
+                  <fieldset>
+                    <input name="email" type="text" class="form-control" id="email" placeholder="Ваш Email" required="">
+                  </fieldset>
+                </div>
+              <div class="col-md-12">
+                <fieldset>
+                  <textarea name="message" rows="6" class="form-control" id="message" placeholder="Ваше сообщение..." required=""></textarea>
+                </fieldset>
+              </div>
+              <div class="col-md-12">
+                <fieldset>
+                  <button type="submit" id="form-submit" class="button">Отправить Сообщение</button>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <div id="map">
+            <iframe src="https://yandex.ru/map-widget/v1/?lang=ru_RU&amp;scroll=true&amp;um=constructor%3A3731183b298164744eeed0d6c6695f693db4e2a85d8359b7de899aad90e76249" frameborder="0" allowfullscreen="true" width="100%" height="422px" style="display: block;"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p><i class="fa fa-copyright"></i> Средняя школа №130 г.Минска имени Рут Уоллер 
+          
+           | Design:
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'Minsk130school/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'Minsk130school/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'Minsk130school/assets/js/isotope.min.js' %}"></script>
+    <script src="{% static 'Minsk130school/assets/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'Minsk130school/assets/js/lightbox.js' %}"></script>
+    <script src="{% static 'Minsk130school/assets/js/tabs.js' %}"></script>
+    <script src="{% static 'Minsk130school/assets/js/video.js' %}"></script>
+    <script src="{% static 'Minsk130school/assets/js/slick-slider.js' %}"></script>
+    <script src="{% static 'Minsk130school/assets/js/custom.js' %}"></script>
+    <script>
+        //according to loftblog tut
+        $('.nav li:first').addClass('active');
+
+        var showSection = function showSection(section, isAnimate) {
+          var
+          direction = section.replace(/#/, ''),
+          reqSection = $('.section').filter('[data-section="' + direction + '"]'),
+          reqSectionPos = reqSection.offset().top - 0;
+
+          if (isAnimate) {
+            $('body, html').animate({
+              scrollTop: reqSectionPos },
+            800);
+          } else {
+            $('body, html').scrollTop(reqSectionPos);
+          }
+
+        };
+
+        var checkSection = function checkSection() {
+          $('.section').each(function () {
+            var
+            $this = $(this),
+            topEdge = $this.offset().top - 80,
+            bottomEdge = topEdge + $this.height(),
+            wScroll = $(window).scrollTop();
+            if (topEdge < wScroll && bottomEdge > wScroll) {
+              var
+              currentId = $this.data('section'),
+              reqLink = $('a').filter('[href*=\\#' + currentId + ']');
+              reqLink.closest('li').addClass('active').
+              siblings().removeClass('active');
+            }
+          });
+        };
+
+        $('.main-menu, .scroll-to-section').on('click', 'a', function (e) {
+          if($(e.target).hasClass('external')) {
+            return;
+          }
+          e.preventDefault();
+          $('#menu').removeClass('active');
+          showSection($(this).attr('href'), true);
+        });
+
+        $(window).scroll(function () {
+          checkSection();
+        });
+    </script>
+</body>
+</html>
