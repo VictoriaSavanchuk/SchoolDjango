@@ -81,7 +81,27 @@ p {
 }
 
 a.menu-link { display: none; }
-
+.blog{
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  color:white;
+  padding: 20px;
+}
+.blog-icon{
+  width: 50%;
+}
+.blog-icon>img{
+  width: 80%;
+}
+.blog-text{
+  width: 70%;
+  padding-left: 20px;
+}
+.pagination{
+  color: white;
+  padding-left: 20%;
+}
 @media screen and (max-width: 950px) {
   a.menu-link {
     float: right;

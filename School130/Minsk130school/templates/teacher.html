@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}<TITLE> Учителя| Минск |Средняя школа №130 </TITLE>{% endblock %} 
+{% block content %}   
+{% load static %}
+
+<section class="section video" data-section="section5">
+    <div class="container">
+      <div class="row">
+        <a href ="{% url 'teachers' %}"><strong>назад</strong></a>
+        <div class="blog">
+            <div class="blog-icon">
+              {% if teacher.image %}
+                <img src="{{teacher.image.url}}">
+              {% else %}
+                <p>No image</p>
+              {% endif %}
+            </div>
+              <div class="blog-text">
+                  <h3>{{teacher.brief_information}}</h3>
+                  <h2>{{teacher.first_name}} {{teacher.last_name}}</h2>
+                  <h5>{{teacher.description}}</h5> 
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+</section>
+
+{% endblock %}   

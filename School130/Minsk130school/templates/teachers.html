@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}<TITLE>Учителя| Минск |Средняя школа №130</TITLE>{% endblock %} 
+{% block content %}   
+{% load static %}
+
+<section class="section video" data-section="section5">
+    <div class="container">
+      <div class="row">
+        {% for teacher in info %}
+            <div class="blog">
+              <div class="blog-icon">
+                {% if teacher.image %}
+                  <img  src="{{teacher.image.url}}">
+                {% else %}
+                  <p>No image</p>
+                {% endif %}
+              </div>
+                <div class="blog-text">
+                    <a href="{% url 'teacher' teacher.id %}">
+                    <h6>{{teacher.brief_information}}</h6>
+                   </a>
+                    <h2>{{teacher.first_name}} {{teacher.last_name}}</h2>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+      </div>
+     {% include 'pagination.html' %}  
+</section>
+
+{% endblock %}   

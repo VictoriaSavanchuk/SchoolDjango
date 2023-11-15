@@ -113,6 +113,10 @@
 .owl-carousel .fadeOut {
   animation-name: fadeOut; }
 
+.down-content>p{
+  height: 185px;
+}
+
 @keyframes fadeOut {
   0% {
     opacity: 1; }

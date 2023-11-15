@@ -10,7 +10,7 @@ class Blogs(models.Model):
     image = models.ImageField('Изображение', upload_to='blog_images/')
     
     def __str__(self):
-        return self.name
+        return self.title
     
     def image_tag(self):
         return format_html('<img src="{}" width="150" height="150" />'.format(self.image.url))
@@ -23,6 +23,7 @@ class Blogs(models.Model):
 class Teachers(models.Model):
     first_name = models.CharField('Имя', max_length=50)
     last_name = models.CharField('Фамилия', max_length=50)
+    brief_information = models.TextField('Краткая информация') 
     description = models.TextField('Описание')
     image = models.ImageField('Изображение', upload_to='teacher_images/')
     paid_service = models.ForeignKey('PaidServices',  on_delete=models.SET_DEFAULT, verbose_name='Платные услуги',  null=True, default=None)

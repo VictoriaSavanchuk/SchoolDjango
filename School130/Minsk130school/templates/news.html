@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}<TITLE>Новости| Минск |Средняя школа №130</TITLE>{% endblock %} 
+{% block content %}   
+{% load static %}
+
+<section class="section video" data-section="section5">
+    <div class="container">
+      <div class="row">
+            {% for blog in info %}
+            <div class="blog">
+              
+              <div class="blog-icon">
+                {% if blog.image %}
+                  <img src="{{blog.image.url}}">
+                {% else %}
+                  <p>No image</p>
+                {% endif %}
+              </div>
+                <div class="blog-text">
+                    <p>{{blog.publicationDate}}</p>
+                    <h2>{{blog.title}}</h2>
+                    <p>{{blog.content}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+      </div>
+     {% include 'pagination.html' %}  
+</section>
+
+{% endblock %}   
