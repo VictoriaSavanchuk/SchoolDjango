@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 from django.core.paginator import Paginator
 from .forms import AdmissionApplicationForm, QuestionsForm
 from django.contrib import messages
-import csv
+import zipfile
 from django.views import View
 
 # Create your views here.
@@ -71,33 +71,38 @@ def add_question(request):
             return redirect('home')
         
     
-
-
 class ExportView(View):
     def get(self, request):
-        # Получение вопросов и заявок для экспорта
+        # Получение заявок и вопросов для экспорта
+        applications = models.AdmissionApplication.objects.all()
         questions = models.Questions.objects.all()
-        materials = models.AdmissionApplication.objects.all()
 
-        # Создаю CSV-файл
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="export.csv"'
+        # Создание ZIP-архива
+        zip_filename = 'export.zip'
+        with zipfile.ZipFile(zip_filename, 'w') as zipf:
+            # Добавление файлов с заявками
+            for application in applications:
+                # Создание содержимого файла для каждой заявки
+                file_content = f"ФИО родителя: {application.parent_name}\n"
+                file_content += f"Телефон родителя: {application.parent_contact}\n"
+                file_content += f"ФИО ученика: {application.student_name}\n"
+                file_content += f"Класс: {application.student_class}\n"
+                file_content += f"Персональные данные ученика: {application.student_personal_data}\n"
+                file_content += f"Персональные данные родителя: {application.parent_personal_data}\n"
+                zipf.writestr(f'application_{application.id}.txt', file_content)
+            
+            # Добавление файлов с вопросами
+            for question in questions:
+                # Создание содержимого файла для каждого вопроса
+                file_content = f"Имя: {question.name}\n"
+                file_content += f"Email: {question.email}\n"
+                file_content += f"Сообщение: {question.message}\n"
+                zipf.writestr(f'question_{question.id}.txt', file_content)
 
-        # Открытие файла CSV с указанием кодировки
-        writer_materials = csv.writer(response, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL, encoding='utf-8')
-        writer_materials.writerow(['ФИО родителя', 'Телефон родителя', 'ФИО ученика', 'Класс', 'Персональные данные ученика', 'Персональные данные родителя', 'Прикрепленные файлы'])  # Заголовки столбцов
+        # Возврат архива в HTTP-ответе
+        with open(zip_filename, 'rb') as zip_file:
+            response = HttpResponse(zip_file.read(), content_type='application/zip')
+            response['Content-Disposition'] = 'attachment; filename="export.zip"'
+            return response
 
-        writer_question = csv.writer(response, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL, encoding='utf-8')
-        writer_question.writerow(['Имя', 'Email', 'Сообщение'])
-        
-        # Запись вопросов в CSV
-        for question in questions:
-            writer_question.writerow([question.name, question.email, question.message])
 
-        # Запись заявок в CSV
-        for material in materials:
-            writer_materials.writerow([material.parent_name, material.parent_contact, 
-                                       material.student_name, material.student_class, material.student_personal_data,
-                                       material.parent_personal_data, material.attached_files])
-
-        return response

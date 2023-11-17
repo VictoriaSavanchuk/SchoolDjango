@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import *
+from django.urls import reverse
 # Register your models here.
 
 
@@ -7,6 +8,7 @@ class BlogsAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'content', 'publicationDate', 'image_tag')  
     list_display_links = ('id', 'title', 'content', 'publicationDate', 'image_tag')
     list_filter = ('id', 'publicationDate')
+    ordering = ['publicationDate']
 
 class TeachersAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'brief_information', 'description', 'paid_service', 'image_tag')  
@@ -30,7 +32,14 @@ class LeadershipContactsAdmin(admin.ModelAdmin):
     list_display_links = ('position', 'first_name', 'last_name', 'contact_info')  
     
 class AdmissionApplicationAdmin(admin.ModelAdmin):
-    list_display = ('student_class', 'parent_name', 'parent_contact', 'student_name', 'student_personal_data', 'parent_personal_data', 'attached_files')  
+    def export_link(self, obj):
+        # Генерация ссылки на экспорт для каждого объекта
+        export_url = reverse('export')  #  URL-шаблон для представления экспорта
+        return format_html('<a href="{}">Export</a>', export_url)
+
+    export_link.short_description = "Выгрузить файлы" 
+    
+    list_display = ('student_class', 'parent_name', 'parent_contact', 'student_name', 'student_personal_data', 'parent_personal_data', 'attached_files', 'export_link')  
     list_display_links =  ('student_class', 'parent_name', 'parent_contact', 'student_name', 'student_personal_data', 'parent_personal_data', 'attached_files')  
 
 class PaidServicesAdmin(admin.ModelAdmin):
@@ -38,7 +47,14 @@ class PaidServicesAdmin(admin.ModelAdmin):
     list_display_links = ('title', 'description', 'image_tag', 'category') 
     
 class QuestionsAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'message') 
+    def export_link(self, obj):
+        # Генерация ссылки на экспорт для каждого объекта
+        export_url = reverse('export')  #  URL-шаблон для представления экспорта
+        return format_html('<a href="{}">Export</a>', export_url)
+
+    export_link.short_description = "Выгрузить файлы"  # Название столбца в административной панели
+    
+    list_display = ('name', 'email', 'message', 'export_link') 
     list_display_links = ('name', 'email', 'message') 
         
 admin.site.register(Blogs, BlogsAdmin)
