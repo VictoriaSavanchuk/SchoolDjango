@@ -36,6 +36,10 @@ class AdmissionApplicationAdmin(admin.ModelAdmin):
 class PaidServicesAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'image_tag', 'category') 
     list_display_links = ('title', 'description', 'image_tag', 'category') 
+    
+class QuestionsAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'message') 
+    list_display_links = ('name', 'email', 'message') 
         
 admin.site.register(Blogs, BlogsAdmin)
 admin.site.register(Teachers, TeachersAdmin)
@@ -46,3 +50,4 @@ admin.site.register(LeadershipContacts, LeadershipContactsAdmin)
 admin.site.register(AdmissionApplication, AdmissionApplicationAdmin)
 admin.site.register(CategoriesPaidServices)
 admin.site.register(PaidServices, PaidServicesAdmin)
+admin.site.register(Questions, QuestionsAdmin)

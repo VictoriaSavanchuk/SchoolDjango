@@ -89,23 +89,23 @@ class LeadershipContacts(models.Model):
         return f'{self.last_name} {self.first_name}'
     
     class Meta:
-        verbose_name = 'Контакты руководства'
+        verbose_name = 'Контакт руководства'
         verbose_name_plural = 'Контакты руководства'
         
 class AdmissionApplication(models.Model):
-    parent_name = models.CharField('Имя родителя', max_length=100)
-    parent_contact = models.CharField('Контактный телефон родителя', max_length=100)
-    student_name = models.CharField('Имя ученика', max_length=100)
+    parent_name = models.CharField('ФИО родителя', max_length=100)
+    parent_contact = models.CharField('Телефон родителя', max_length=100)
+    student_name = models.CharField('ФИО ученика', max_length=100)
     student_class = models.CharField('Класс', max_length=50)
-    student_personal_data = models.TextField('Персональные данные ученика')
-    parent_personal_data = models.TextField('Персональные данные родителя')
+    student_personal_data = models.CharField('Персональные данные ученика', max_length=150)
+    parent_personal_data = models.CharField('Персональные данные родителя', max_length=150)
     attached_files = models.FileField('Прикрепленные файлы', upload_to='admission_files/')
     
     def __str__(self):
         return f'{self.student_class} {self.student_name}'
     
     class Meta:
-        verbose_name = 'Заявки на поступление'
+        verbose_name = 'Заявка на поступление'
         verbose_name_plural = 'Заявки на поступление'
         
 class PaidServices(models.Model):
@@ -133,4 +133,15 @@ class CategoriesPaidServices(models.Model):
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'    
+        
+class Questions(models.Model):
+    name = models.CharField('Имя', max_length=100)
+    email = models.EmailField()
+    message = models.TextField('Сообщение')
     
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = 'Вопрос'
+        verbose_name_plural = 'Вопросы'    

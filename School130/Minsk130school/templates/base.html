@@ -58,7 +58,7 @@ https://templatemo.com/tm-557-grad-school
         
         <!-- <li><a href="#section5">Video</a></li> -->
         <li><a href="#section6">Контакты</a></li>
-        <li><a href="https://adu.by/images/2023/obr/obr-standarty-ob-sred-obrazovaniya.pdf" rel="sponsored" class="external">Стандарты и требования</a></li>
+        <li><a href="{% url 'news' %}" rel="sponsored" class="external">Новости</a></li>
       </ul>
     </nav>
   </header>
@@ -80,21 +80,22 @@ https://templatemo.com/tm-557-grad-school
                 	
                     Please visit https://templatemo.com/contact page -->
                     
-          <form id="contact" action="" method="post">
+          <form id="contact" action="{% url 'add_question' %}" method="post" enctype="multipart/form-data">
             <div class="row">
+              {% csrf_token %}
               <div class="col-md-6">
                   <fieldset>
-                    <input name="name" type="text" class="form-control" id="name" placeholder="Ваше имя" required="">
+                    {{question_form.name}}
                   </fieldset>
                 </div>
                 <div class="col-md-6">
                   <fieldset>
-                    <input name="email" type="text" class="form-control" id="email" placeholder="Ваш Email" required="">
+                    {{question_form.email}}
                   </fieldset>
                 </div>
               <div class="col-md-12">
                 <fieldset>
-                  <textarea name="message" rows="6" class="form-control" id="message" placeholder="Ваше сообщение..." required=""></textarea>
+                  {{question_form.message}}
                 </fieldset>
               </div>
               <div class="col-md-12">
@@ -104,7 +105,22 @@ https://templatemo.com/tm-557-grad-school
               </div>
             </div>
           </form>
+
+          <!--всплывающее сообщение об отправке сообщ -->
+          {% if messages %}
+          <script>
+              document.addEventListener("DOMContentLoaded", function() {
+                  showSuccessMessage();
+              });
+
+              function showSuccessMessage() {
+                  alert("Сообщение успешно отправлено!");
+              }
+          </script>
+        {% endif %}
         </div>
+        
+  
         <div class="col-md-6">
           <div id="map">
             <iframe src="https://yandex.ru/map-widget/v1/?lang=ru_RU&amp;scroll=true&amp;um=constructor%3A3731183b298164744eeed0d6c6695f693db4e2a85d8359b7de899aad90e76249" frameborder="0" allowfullscreen="true" width="100%" height="422px" style="display: block;"></iframe>
@@ -188,5 +204,7 @@ https://templatemo.com/tm-557-grad-school
           checkSection();
         });
     </script>
+
+    
 </body>
 </html>

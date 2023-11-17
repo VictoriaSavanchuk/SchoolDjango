@@ -57,7 +57,7 @@
       <div class="features-post third-features">
         <div class="features-content">
           <div class="content-show">
-            <h4><i class="fa fa-book"></i>Платные Кружки</h4>
+            <h4 class="scroll-to-section"><i class="fa fa-book"></i><a href="#section4">Платные Кружки</a></h4>
           </div>
           <div class="content-hide">
             <p>Деятельность по интересам это возможность развиваться в интересной для себя области, получить дополнительные знания, развивать навыки командной работы, чувство долга и ответственности; это возможность найти друзей, интересный круг общения, поддержать свою независимость и инициативность, и т.п.</p>
@@ -176,30 +176,13 @@
         <div class="top-content">
           <h6>Заполните форму <em>заявки для поступления</em>  в нашу школу</h6>
         </div>
-        <form id="contact" action="" method="get">
-          <div class="row">
-            <div class="col-md-12">
-              <fieldset>
-                <input name="name" type="text" class="form-control" id="name" placeholder="Your Name" required="">
-              </fieldset>
-            </div>
-            <div class="col-md-12">
-              <fieldset>
-                <input name="email" type="text" class="form-control" id="email" placeholder="Your Email" required="">
-              </fieldset>
-            </div>
-            <div class="col-md-12">
-              <fieldset>
-                <input name="phone-number" type="text" class="form-control" id="phone-number" placeholder="Your Phone Number" required="">
-              </fieldset>
-            </div>
-            <div class="col-md-12">
-              <fieldset>
-                <button type="submit" id="form-submit" class="button">Get it now</button>
-              </fieldset>
-            </div>
-          </div>
+        <form action="{% url 'add_admission_application' %}" method="post" enctype="multipart/form-data">
+          {{ application_form }}
+          {% csrf_token %}
+          <button type="submit" id="form-submit" class="button">Отправить</button>
+          
         </form>
+        
       </div>
     </div>
   </div>

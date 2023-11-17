@@ -1,12 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from . import models
 from django.http import HttpResponse, HttpResponseNotFound
 from django.core.paginator import Paginator
-
+from .forms import AdmissionApplicationForm, QuestionsForm
+from django.contrib import messages
 # Create your views here.
 
 def home (request):
-    return render(request, 'home.html', {'home':home})
+    application_form = AdmissionApplicationForm()
+    question_form = QuestionsForm()
+    return render(request, 'home.html', {'application_form':application_form,
+                                         'question_form':question_form})
 
 def show_news (request):
     blogs = models.Blogs.objects.all()    
@@ -14,21 +18,47 @@ def show_news (request):
     paginator = Paginator(blogs, 4)   #показ на стр. по 4 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'news.html', {'info': page_obj})
+    question_form = QuestionsForm()
+    return render(request, 'news.html', {'info': page_obj,
+                                         'question_form':question_form})
 
 def show_teachers (request):
     teachers = models.Teachers.objects.all()    
     paginator = Paginator(teachers, 4)   
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'teachers.html', {'info': page_obj})
+    question_form = QuestionsForm()
+    return render(request, 'teachers.html', {'info': page_obj,
+                                             'question_form':question_form})
 
 def show_teacher (request, teacher_id):
     try:
         teacher = models.Teachers.objects.get(id= teacher_id) 
     except:
-        return HttpResponseNotFound() 
-    return render(request, 'teacher.html', {'teacher':teacher})
+        return HttpResponseNotFound()
+    question_form = QuestionsForm() 
+    return render(request, 'teacher.html', {'teacher':teacher,
+                                            'question_form':question_form})
+
+# сохранение информации в бд из форм, при этом прописываю url add_question и add_admission_application
+# и добавляю в шаблоне home.html в атрибут action url-адрес, на который будет отправлена форма
+def add_admission_application(request):
+    if request.method == 'POST':
+        application_form  = AdmissionApplicationForm(request.POST, request.FILES)
+        if application_form.is_valid():
+            application_form.save()
+            return redirect('home')   # Перенаправляем пользователя на главную страницу после успешного сохранения формы
+    
+
+def add_question(request):
+    if request.method == 'POST':
+        question_form = QuestionsForm(request.POST)
+        if question_form.is_valid():
+            question_form.save()
+            messages.success(request, 'Сообщение успешно отправлено!')
+            return redirect('home')
+        
+    
 
 # def slider_view(request):
 #     print('hi')
