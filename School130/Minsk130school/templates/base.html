@@ -184,7 +184,7 @@ https://templatemo.com/tm-557-grad-school
             if (topEdge < wScroll && bottomEdge > wScroll) {
               var
               currentId = $this.data('section'),
-              reqLink = $('a').filter('[href*=\\#' + currentId + ']');
+              reqLink = $('a').filter('[href*=\\#' + currentId + ']');   
               reqLink.closest('li').addClass('active').
               siblings().removeClass('active');
             }
@@ -203,6 +203,8 @@ https://templatemo.com/tm-557-grad-school
         $(window).scroll(function () {
           checkSection();
         });
+
+        
     </script>
 
     

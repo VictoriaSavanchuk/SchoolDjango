@@ -26,7 +26,7 @@ class Teachers(models.Model):
     brief_information = models.TextField('Краткая информация') 
     description = models.TextField('Описание')
     image = models.ImageField('Изображение', upload_to='teacher_images/')
-    paid_service = models.ForeignKey('PaidServices',  on_delete=models.SET_DEFAULT, verbose_name='Платные услуги',  null=True, default=None)
+    paid_service = models.ForeignKey('PaidServices',  on_delete=models.SET_DEFAULT, related_name='teachers', verbose_name='Платные услуги',  null=True, default=None)   #related_name позволит получить всех связанных преподавателей для каждого кружка.
     
     def __str__(self):
         return f'{self.last_name} {self.first_name}'

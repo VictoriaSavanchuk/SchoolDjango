@@ -9,5 +9,5 @@ urlpatterns = [
     path('home/news/', views.show_news, name= 'news'),
     path('home/teachers/', views.show_teachers, name= 'teachers'),
     path('home/teachers/<int:teacher_id>/', views.show_teacher, name= 'teacher'),
-        
+    path('export/', views.ExportView.as_view(), name='export'),  
 ]

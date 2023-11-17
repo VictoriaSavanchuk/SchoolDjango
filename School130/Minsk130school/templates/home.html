@@ -34,7 +34,7 @@
           <div class="content-hide">
             <p>Размещение развёрнутых материалов о прошедших, состоявшихся событиях.</p>
             <p class="hidden-sm">Размещение развёрнутых материалов о прошедших, состоявшихся событиях.</p>
-            <div class="scroll-to-section"><a href="#section2">Информация</a></div>    <!---->
+            <div class="scroll-to-section"><a href="#section8">Информация</a></div>    <!---->
         </div>
         </div>
       </div>
@@ -48,7 +48,7 @@
           <div class="content-hide">
             <p>Чтобы быть хорошим преподавателем, нужно любить то, что преподаешь, и любить тех, кому преподаешь. Учитель — это человек, который выращивает две мысли там, где раньше росла одна.</p>
             <p class="hidden-sm">Чтобы быть хорошим преподавателем, нужно любить то, что преподаешь, и любить тех, кому преподаешь. Учитель — это человек, который выращивает две мысли там, где раньше росла одна.</p>
-            <div class="scroll-to-section"><a href="#section3">Подробнее</a></div>
+            <div class="scroll-to-section"><a href="#section7">Подробнее</a></div>
         </div>
         </div>
       </div>
@@ -138,6 +138,67 @@
 </div>
 </section>
 
+<section class="section video" data-section="section8">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-heading">
+          <h2>Новости</h2>
+        </div>
+      </div>
+      <div class="owl-carousel owl-theme">
+        {% for blog in blogs %}
+        <div class="item">
+          {% if blog.image %}
+            <img class="teacher-img" src ="{{blog.image.url}}">
+          {% else %}
+            <p>Нет фото</p>
+          {% endif %}
+          <div class="down-content">
+            <h4 class="news-text">{{blog.title}}</h4>
+            <p class="news-text">{{blog.content}}</p>
+            <div class="text-button-free">
+              <p class="news-text">{{blog.publicationDate}} <i class="fa fa-angle-double-right"></i></p>
+            </div> 
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>         
+    </div>    
+  </div>
+</section>
+
+<section class="section courses" data-section="section7">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-heading">
+          <h2>Наши преподователи</h2>
+        </div>
+      </div>
+      <div class="owl-carousel owl-theme">
+        {% for teacher in teachers %}
+        <div class="item">
+          {% if teacher.image %}
+            <img class="teacher-img" src ="{{teacher.image.url}}">
+          {% else %}
+            <p>Нет фото</p>
+          {% endif %}
+          <div class="down-content">
+            <a href="{% url 'teacher' teacher.id %}">
+            <h4>{{teacher.first_name}} {{teacher.last_name}}</h4>
+          </a>
+            <h6>{{teacher.brief_information}}</h6>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>         
+    </div>    
+  </div>
+</section>
+
 <section class="section coming-soon" data-section="section3">
 <div class="container">
   <div class="row">
@@ -182,7 +243,19 @@
           <button type="submit" id="form-submit" class="button">Отправить</button>
           
         </form>
-        
+         <!--всплывающее сообщение об отправке сообщ -->
+         {% if messages %}
+         <script>
+             document.addEventListener("DOMContentLoaded", function() {
+                 showSuccessMessage();
+             });
+
+             function showSuccessMessage() {
+                 alert("Заявка успешно отправлена!");
+             }
+         </script>
+       {% endif %}
+       </div>
       </div>
     </div>
   </div>
@@ -198,64 +271,40 @@
       </div>
     </div>
     <div class="owl-carousel owl-theme">
-    
-     <div class="item">
-        <img src="{% static '../media/circle_images/english.jpg' %}" alt="Course #2">
-        <div class="down-content">
-          <h4>Английский язык</h4>
-          <p>Предлагаемый курс позволяет учащимся заглянуть в будущее и увидеть, как в той или иной профессии могут понадобиться умения и навыки, приобретенные ими в школе.</p>
-          {% comment %} <div class="author-image">
-            <img src="assets/images/author-02.png" alt="Author 2">
+      {% for course in courses %}
+        <div class="item">
+          {% if course.image %}
+            <img src ="{{course.image.url}}">
+          {% else %}
+            <p>Нет фото</p>
+          {% endif %}
+          <div class="down-content">
+            <h4>{{course.title}}</h4>
+            <p>{{course.description}}</p>
+            <div class="teacher">
+              {% for teacher in course.teachers_set %}
+              <div class="author-image">
+                {% if teacher.image %}
+                  <a href="{% url 'teacher' teacher.id %}">
+                    <img src= {{ teacher.image.url }}>
+                  </a>
+                {% else %}
+                  <p>Нет фото</p>
+                {% endif %}
+              </div>
+              {% endfor %}
+            </div>
+            {% comment %}<div class="text-button-free">
+              <a href="#">Free <i class="fa fa-angle-double-right"></i></a>
+            </div> {% endcomment %}
           </div>
-          <div class="text-button-free">
-            <a href="#">Free <i class="fa fa-angle-double-right"></i></a>
-          </div> {% endcomment %}
         </div>
-      </div>
-      <div class="item">
-        <img src="{% static '../media/circle_images/sport.jpg' %}" alt="Course #3">
-        <div class="down-content">
-          <h4>Спортивные игры</h4>
-          <p>Спортивные игры для детей – это величайший подарок, который взрослые могут сделать ребятам. Играя, ребенок укрепляет здоровье, развивает координацию, учится действовать в команде и получает массу положительных эмоций.</p>
-          {% comment %} <div class="author-image">
-            <img src="{% static 'media/circle_images/Planning-After-School-Activities.jpg' %}" alt="Author 3">
-          </div>
-          <div class="text-button-pay">
-            <a href="#">Pay <i class="fa fa-angle-double-right"></i></a>
-          </div> {% endcomment %}
-        </div>
-      </div>
-      <div class="item">
-        <img src="{% static '../media/circle_images/подготовка.jpg' %}" alt="Course #4">
-        <div class="down-content">
-          <h4>Подготовка к обучению в школе</h4>
-          <p>Подготовить ребенка к поступлению в 1 класс непросто. Но мы вам поможем!</p>
-          {% comment %} <div class="author-image">
-            <img src="assets/images/author-04.png" alt="Author 4">
-          </div>
-          <div class="text-button-free">
-            <a href="#">Free <i class="fa fa-angle-double-right"></i></a>
-          </div> {% endcomment %}
-        </div>
-      </div>
-      <div class="item">
-        <img src="{% static '../media/circle_images/Planning-After-School-Activities.jpg' %}" alt="">
-        <div class="down-content">
-          <h4>Юный художник</h4>
-          <p>Содержание программы нацелено на формирование культуры творческой личности, на приобщение учащихся к общечеловеческим ценностям через собственное творчество и освоение опыта прошлого.</p>
-          {% comment %} <div class="author-image">
-            <img src="assets/images/author-05.png" alt="">
-          </div>
-          <div class="text-button-pay">
-            <a href="#">Pay <i class="fa fa-angle-double-right"></i></a>
-          </div> {% endcomment %}
-        </div>
-      </div>         
+
+      {% endfor %}  
     </div>         
   </div>    
 </div>
 </section>
-
 
 <section class="section video" data-section="section5">
 <div class="container">
@@ -280,7 +329,6 @@
         </div>
         <figure>
           <iframe width="540" height="455.5" src="https://www.youtube.com/embed/1U55bO_2F20?autoplay=1" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" frameborder="0" allowfullscreen=""></iframe>
-          {% comment %} <a href="https://www.youtube.com/embed/1U55bO_2F20?autoplay=1" class="play"><img src="{% static 'Minsk130school/assets/images/main-thumb.png'%}"></a> {% endcomment %}
         </figure>
       </article>
     </div>

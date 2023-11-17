@@ -112,11 +112,16 @@
 
 .owl-carousel .fadeOut {
   animation-name: fadeOut; }
-
-.down-content>p{
-  height: 185px;
+.teacher{
+  display: flex;
+  align-items: center;
 }
-
+.teacher-img{
+  height: 158px;
+}
+.news-text{
+  color:white;
+}
 @keyframes fadeOut {
   0% {
     opacity: 1; }
