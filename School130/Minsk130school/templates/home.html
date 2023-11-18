@@ -3,6 +3,31 @@
 {% block content %}   
 {% load static %}
 
+    {% block navigation %}
+      
+
+      <ul class="main-menu">
+        <li><a href="#section1">Главная</a></li>
+        <li><a href="#section4">Платные образовательные услуги</a></li>
+        <li class="has-submenu"><a href="#section2">О нас</a>
+          <ul class="sub-menu">
+            <li><a href="#section2">Кто мы?</a></li>
+            <li><a href="#section9">Администрация школы</a></li>
+            <li><a href="#section7">Наши преподаватели</a></li>
+            <li><a href="#section4">Чем занимаемся?</a></li>
+            <li><a href="#section8">Новости</a></li>
+            <li><a href="#section3">Подать заявку на поступление?</a></li>
+            <li><a href="https://adu.by/images/2023/obr/obr-standarty-ob-sred-obrazovaniya.pdf" rel="sponsored" class="external">Стандарты и требования</a></li>
+          </ul>
+        </li>
+        
+        <!-- <li><a href="#section5">Video</a></li> -->
+        <li><a href="#section6">Контакты</a></li>
+        <li><a href="{% url 'news' %}" rel="sponsored" class="external">Новости</a></li>
+      </ul>
+    {% endblock %}
+    {% comment %} </nav>
+  </header> {% endcomment %}
  <!-- ***** Main Banner Area Start ***** -->
  <section class="section main-banner" id="top" data-section="section1">
   <video autoplay muted loop id="bg-video">
@@ -335,5 +360,39 @@
   </div>
 </div>
 </section>
+
+<section class="section courses" data-section="section9">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-heading">
+          <h2>Администрация школы</h2>
+        </div>
+      </div>
+      <div class="owl-carousel owl-theme">
+        {% for admin in admins %}
+        <div class="item">
+          {% if admin.image %}
+            <img class="teacher-img" src ="{{admin.image.url}}">
+          {% else %}
+            <p>Нет фото</p>
+          {% endif %}
+          <div class="down-content">
+           <a href="{% url 'administration' admin.id %}"> 
+            <h4>{{admin.first_name}} {{admin.last_name}}</h4>
+           </a> 
+            <h6>{{admin.position}}</h6>
+            <div class="text-button-free">
+              <p><br>{{admin.contact_info}} <br></p>
+            </div> 
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>         
+    </div>    
+  </div>
+</section>
+
 
 {% endblock %}   

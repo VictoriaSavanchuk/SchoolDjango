@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}<TITLE> Администрация| Минск |Средняя школа №130 </TITLE>{% endblock %} 
+{% block content %}   
+{% load static %}
+
+<section class="section video" data-section="section5">
+    <div class="container">
+      <div class="row">
+        <a href ="{% url 'home' %}"><strong>назад</strong></a>
+        <div class="blog">
+            <div class="blog-icon">
+              {% if admin.image %}
+                <img src="{{admin.image.url}}">
+              {% else %}
+                <p>No image</p>
+              {% endif %}
+            </div>
+              <div class="blog-text">
+                  <h3>{{admin.position}}</h3>
+                  <h2>{{admin.first_name}} {{admin.last_name}}</h2>
+                  <h5>{{admin.contact_info}}</h5> 
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+</section>
+</div>
+{% endblock %}   

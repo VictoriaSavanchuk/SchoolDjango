@@ -15,13 +15,15 @@ def home (request):
     blogs = models.Blogs.objects.order_by('-publicationDate')
     teachers = models.Teachers.objects.all()
     courses = models.PaidServices.objects.all()
+    admins = models.LeadershipContacts.objects.all()
     for course in courses:
         course.teachers_set = course.teachers.all()  # Получение всех преподавателей для каждого кружка
     return render(request, 'home.html', {'application_form':application_form,
                                          'question_form':question_form,
                                          'courses': courses,
                                          'teachers':teachers,
-                                         'blogs':blogs})
+                                         'blogs':blogs,
+                                         'admins':admins})
 
 def show_news (request):
     blogs = models.Blogs.objects.order_by('-publicationDate')
@@ -50,6 +52,16 @@ def show_teacher (request, teacher_id):
     question_form = QuestionsForm() 
     return render(request, 'teacher.html', {'teacher':teacher,
                                             'question_form':question_form})
+    
+def show_administration (request, admin_id):
+    try:
+        admin = models.LeadershipContacts.objects.get(id= admin_id) 
+    except:
+        return HttpResponseNotFound()
+    question_form = QuestionsForm() 
+    return render(request, 'administration.html', {'admin':admin,
+                                            'question_form':question_form})
+    
 
 # сохранение информации в бд из форм, при этом прописываю url add_question и add_admission_application
 # и добавляю в шаблоне home.html в атрибут action url-адрес, на который будет отправлена форма

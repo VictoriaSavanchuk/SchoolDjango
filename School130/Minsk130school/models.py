@@ -39,6 +39,7 @@ class Teachers(models.Model):
         verbose_name = 'Преподаватель'
         verbose_name_plural = 'Преподаватели'
         
+        
 class Awards(models.Model):
     title = models.CharField('Название', max_length=100)
     description = models.TextField('Описание')
@@ -84,9 +85,14 @@ class LeadershipContacts(models.Model):
     first_name = models.CharField('Имя', max_length=50)
     last_name = models.CharField('Фамилия', max_length=50)
     contact_info = models.CharField('Контактная информация', max_length=100)
+    image = models.ImageField('Изображение', upload_to='administration_images/')
     
     def __str__(self):
         return f'{self.last_name} {self.first_name}'
+    
+    def image_tag(self):
+        return format_html('<img src="{}" width="150" height="150" />'.format(self.image.url))
+    image_tag.short_description = 'Изображение'
     
     class Meta:
         verbose_name = 'Контакт руководства'
@@ -114,8 +120,10 @@ class PaidServices(models.Model):
     image = models.ImageField('Изображение', upload_to='circle_images/')
     category = models.ForeignKey('CategoriesPaidServices',  on_delete=models.SET_DEFAULT, verbose_name='Категория', null=True, default=None)  
     
+    
     def __str__(self):
         return self.title
+    
     def image_tag(self):
         return format_html('<img src="{}" width="150" height="150" />'.format(self.image.url))
     image_tag.short_description = 'Изображение'

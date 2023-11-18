@@ -14,6 +14,7 @@ class TeachersAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'brief_information', 'description', 'paid_service', 'image_tag')  
     list_display_links = ('first_name', 'last_name', 'description', 'paid_service', 'image_tag')
     ordering = ['last_name', 'first_name']
+
     
 class AwardsAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'image_tag')
@@ -28,8 +29,9 @@ class LicensesAdmin(admin.ModelAdmin):
     list_display_links = ('title', 'description', 'file') 
     
 class LeadershipContactsAdmin(admin.ModelAdmin):
-    list_display = ('position', 'first_name', 'last_name', 'contact_info')  
-    list_display_links = ('position', 'first_name', 'last_name', 'contact_info')  
+    list_display = ('position', 'first_name', 'last_name', 'contact_info', 'image_tag')  
+    list_display_links = ('position', 'first_name', 'last_name', 'contact_info', 'image_tag')  
+    ordering = ['position']
     
 class AdmissionApplicationAdmin(admin.ModelAdmin):
     def export_link(self, obj):
