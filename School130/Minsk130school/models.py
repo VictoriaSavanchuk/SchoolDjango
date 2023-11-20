@@ -71,10 +71,14 @@ class Documents(models.Model):
 class Licenses(models.Model):
     title = models.CharField('Название', max_length=100)
     description = models.TextField('Описание')
-    file = models.FileField('Изображение', upload_to='licenses/')
+    image = models.FileField('Изображение', upload_to='licenses/')
     
     def __str__(self):
         return self.title
+    
+    def image_tag(self):
+        return format_html('<img src="{}" width="150" height="150" />'.format(self.image.url))
+    image_tag.short_description = 'Изображение'
     
     class Meta:
         verbose_name = 'Лицензия'

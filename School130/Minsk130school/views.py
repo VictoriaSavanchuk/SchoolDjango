@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from . import models
 from django.http import HttpResponse, HttpResponseNotFound
 from django.core.paginator import Paginator
-from .forms import AdmissionApplicationForm, QuestionsForm
+from .forms import AdmissionApplicationForm, QuestionsForm, DisplayForm
 from django.contrib import messages
 import zipfile
 from django.views import View
@@ -61,6 +61,32 @@ def show_administration (request, admin_id):
     question_form = QuestionsForm() 
     return render(request, 'administration.html', {'admin':admin,
                                             'question_form':question_form})
+
+
+def show_awards_licenses(request):
+    data = [] 
+    display_option = None
+    question_form = QuestionsForm()
+    display_form = DisplayForm()
+    if request.method == 'POST':
+        print('hello')
+        display_option = request.POST.get('display_option')
+        # display_form = DisplayForm(request.POST)
+        # if display_form.is_valid():
+        #     display_option = display_form.cleaned_data['display_option']
+            
+        print(display_option)
+            
+        if display_option == 'awards':
+            data = models.Awards.objects.all()
+        elif display_option == 'licenses':
+            data = models.Licenses.objects.all()
+    
+    return render(request, 'awards.html', 
+                          {'data': data,
+                           'display_form': display_form,
+                           'display_option': display_option,
+                           'question_form':question_form})    
     
 
 # сохранение информации в бд из форм, при этом прописываю url add_question и add_admission_application

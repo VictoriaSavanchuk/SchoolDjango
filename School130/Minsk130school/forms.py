@@ -28,3 +28,11 @@ class AdmissionApplicationForm(forms.ModelForm):
         model = AdmissionApplication
         fields = ['parent_name', 'parent_contact', 'student_name', 'student_class', 
                   'student_personal_data', 'parent_personal_data', 'attached_files']
+        
+class DisplayForm(forms.Form):
+    DISPLAY_CHOICES = [
+        ('awards', 'Награды'),
+        ('licenses', 'Лицензии')
+    ]
+
+    display_option = forms.ChoiceField(label='', choices=DISPLAY_CHOICES) 

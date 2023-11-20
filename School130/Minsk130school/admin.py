@@ -25,8 +25,8 @@ class DocumentsAdmin(admin.ModelAdmin):
     list_display_links = ('title', 'description', 'file')
     
 class LicensesAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'file')  
-    list_display_links = ('title', 'description', 'file') 
+    list_display = ('title', 'description', 'image_tag')  
+    list_display_links = ('title', 'description', 'image_tag') 
     
 class LeadershipContactsAdmin(admin.ModelAdmin):
     list_display = ('position', 'first_name', 'last_name', 'contact_info', 'image_tag')  
