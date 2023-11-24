@@ -114,6 +114,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+#Локальное хранилище (FileSystemStorage)
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

@@ -2,7 +2,11 @@ from django.urls import path
 from . import views
 
 
-urlpatterns = [
+urlpatterns = [#Файловый менеджер
+    path('files/', views.FileListView.as_view(), name='file_list'),
+    path('upload/', views.UploadFileView.as_view(), name='upload_file'),
+    path('create_folder/', views.CreateFolderView.as_view(), name='create_folder'),
+    #url-маршруты приложения
     path('home/add_admission_application/', views.add_admission_application, name='add_admission_application'),
     path('home/add_question/', views.add_question, name='add_question'),
     path('home/', views.home, name= 'home'),

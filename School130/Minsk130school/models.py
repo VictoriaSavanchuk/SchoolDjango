@@ -157,3 +157,17 @@ class Questions(models.Model):
     class Meta:
         verbose_name = 'Вопрос'
         verbose_name_plural = 'Вопросы'    
+        
+        
+#Файловый менеджер
+class File(models.Model):
+    name = models.CharField('Имя', max_length=255)  # Название файла
+    file_path = models.FileField('Путь', upload_to='files/')  # Путь к файлу
+    created_date = models.DateTimeField('Дата создания', auto_now_add=True)  # Дата создания файла
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = 'Файл'
+        verbose_name_plural = 'Файлы'    

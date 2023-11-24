@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}<TITLE>Загрузка файла| Минск |Средняя школа №130</TITLE>{% endblock %} 
+{% block content %}   
+{% load static %}
+
+<section class="section coming-soon" >
+    <div class="container">
+      <div class="row">
+        
+        <div class="col-md-5">
+            <div class="right-content">
+              <div class="top-content">
+                <h6>Загрузите <em>файл</em></h6>
+              </div>
+              <form action="{% url 'upload_file' %}" method="post" enctype="multipart/form-data">
+                {{ upload_form }}
+                {% csrf_token %}
+                <button type="submit" id="form-submit" class="button">Загрузить</button>
+                
+              </form>
+              
+             </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+</section>
+
+{% endblock %}   

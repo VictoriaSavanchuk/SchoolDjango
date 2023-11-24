@@ -36,3 +36,11 @@ class DisplayForm(forms.Form):
     ]
 
     display_option = forms.ChoiceField(label='', choices=DISPLAY_CHOICES) 
+
+
+#Файловый менеджер    
+class UploadFileForm(forms.Form):
+    file = forms.FileField(label=' ', widget=forms.ClearableFileInput(attrs={'placeholder': 'Добавить файл', 'class': 'form-control'}))
+
+class CreateFolderForm(forms.Form):
+    folder_name = forms.CharField(label='', max_length=255,widget=forms.TextInput(attrs={'placeholder': 'Введите название папки', 'class': 'form-control'}))

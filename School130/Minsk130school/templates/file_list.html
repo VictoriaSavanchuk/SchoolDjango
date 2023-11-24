@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}<TITLE>Файлы| Минск |Средняя школа №130</TITLE>{% endblock %} 
+{% block content %}   
+{% load static %}
+
+<section class="section video" data-section="section5">
+    <div class="container">
+      <div class="row">
+        {% for file in files %}
+            <div class="blog">
+                <div class="blog-text">
+                    <p>{{file.created_date}}</p>
+                    <h2>{{file.name}}</h2>
+                    <p>{{file.file_path}}</p>
+                </div>
+            </div>
+            {% endfor %}
+      </div>
+    </div>
+</section>
+
+
+{% endblock %}   

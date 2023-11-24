@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import *
 from django.urls import reverse
+from django.urls import path
+from . import views
 # Register your models here.
 
 
@@ -58,7 +60,29 @@ class QuestionsAdmin(admin.ModelAdmin):
     
     list_display = ('name', 'email', 'message', 'export_link') 
     list_display_links = ('name', 'email', 'message') 
-        
+    
+#Файловый менеджер
+class FileAdmin(admin.ModelAdmin):
+    def file_list(self, obj):
+        file_list_url = reverse('file_list')  #  URL-шаблон для представления экспорта
+        return format_html('<a href="{}">Просмотр</a>', file_list_url)
+
+    file_list.short_description = "Просмотр файлов"
+    list_display = ('name', 'file_path', 'created_date', 'file_list')
+    
+    def get_urls(self):
+        # Регистрируем URL-маршруты для админки
+        urls = super().get_urls()
+        my_urls = [
+            path('files/', self.admin_site.admin_view(views.FileListView.as_view()), name='admin_file_list'),
+            path('upload/', self.admin_site.admin_view(views.UploadFileView.as_view()), name='admin_upload_file'),
+            path('create_folder/', self.admin_site.admin_view(views.CreateFolderView.as_view()), name='admin_create_folder'),
+        ]
+        return my_urls + urls
+    
+    def get_changeform_initial_data(self, request):
+        return {'_redirect': reverse('admin_file_list')}
+            
 admin.site.register(Blogs, BlogsAdmin)
 admin.site.register(Teachers, TeachersAdmin)
 admin.site.register(Awards, AwardsAdmin)
@@ -69,3 +93,4 @@ admin.site.register(AdmissionApplication, AdmissionApplicationAdmin)
 admin.site.register(CategoriesPaidServices)
 admin.site.register(PaidServices, PaidServicesAdmin)
 admin.site.register(Questions, QuestionsAdmin)
+admin.site.register(File, FileAdmin)
