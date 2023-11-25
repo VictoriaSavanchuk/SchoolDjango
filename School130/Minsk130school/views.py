@@ -131,6 +131,16 @@ class ExportView(View):
                 file_content += f"Персональные данные родителя: {application.parent_personal_data}\n"
                 zipf.writestr(f'application_{application.id}.txt', file_content)
             
+                # Проверка наличия прикрепленного файла и добавление его в архив
+                if application.attached_files:
+                    file_path = application.attached_files.path    #проверяю наличие прикрепленного файла (attached_files) и добавляю его в архив
+                    #с помощью zipf.write().
+                    # проверка, существует ли файл на диске (os.path.exists(file_path)), 
+                    # чтобы избежать ошибок, если файл был удален или перемещен.
+                    
+                    if os.path.exists(file_path):
+                        zipf.write(file_path, f'application_{application.id}_{application.attached_files.name}')
+            
             # Добавление файлов с вопросами
             for question in questions:
                 # Создание содержимого файла для каждого вопроса
