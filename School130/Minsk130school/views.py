@@ -1,10 +1,9 @@
 import os
-from django.conf import settings
 from django.shortcuts import render, redirect
 from . import models
 from django.http import HttpResponse, HttpResponseNotFound
 from django.core.paginator import Paginator
-from .forms import AdmissionApplicationForm, QuestionsForm, DisplayForm, UploadFileForm, CreateFolderForm
+from .forms import AdmissionApplicationForm, QuestionsForm, DisplayForm
 from django.contrib import messages
 import zipfile
 from django.views import View
@@ -67,22 +66,22 @@ def show_administration (request, admin_id):
 
 def show_awards_licenses(request):
     data = [] 
-    display_option = None
+    display_option = 'awards'
     question_form = QuestionsForm()
     display_form = DisplayForm()
     if request.method == 'POST':
-        print('hello')
-        display_option = request.POST.get('display_option')
-        # display_form = DisplayForm(request.POST)
-        # if display_form.is_valid():
-        #     display_option = display_form.cleaned_data['display_option']
-            
+        display_option = request.POST.get('display_option')            
         print(display_option)
             
         if display_option == 'awards':
             data = models.Awards.objects.all()
         elif display_option == 'licenses':
             data = models.Licenses.objects.all()
+    
+    # Проверяем, был ли отправлен POST-запрос или это просто загрузка страницы
+    # Если это просто загрузка страницы (GET-запрос), отображаем награды
+    if not request.method == 'POST':
+        data = models.Awards.objects.all()
     
     return render(request, 'awards.html', 
                           {'data': data,
@@ -99,7 +98,9 @@ def add_admission_application(request):
         if application_form.is_valid():
             application_form.save()
             messages.success(request, 'Заявка успешно отправлена!')
-            return redirect('home')   # Перенаправляем пользователя на главную страницу после успешного сохранения формы
+    else:
+        application_form  = AdmissionApplicationForm() 
+    return redirect('home')   # Перенаправляем пользователя на главную страницу после успешного сохранения формы
     
 
 def add_question(request):
@@ -154,63 +155,3 @@ class ExportView(View):
             response = HttpResponse(zip_file.read(), content_type='application/zip')
             response['Content-Disposition'] = 'attachment; filename="export.zip"'
             return response
-##Файловый менеджер   
-    
-class FileListView(View):      #просмотр списка файлов
-    def get(self, request):
-        question_form = QuestionsForm()
-        files = models.File.objects.all()
-        return render(request, 'file_list.html', {'files': files,
-                                                   'question_form': question_form})
-    
-    
-
-class UploadFileView(View):     #загрузка файлов
-    def get(self, request):
-        question_form = QuestionsForm()
-        upload_form = UploadFileForm()
-        return render(request, 'upload_file.html', {'upload_form': upload_form,
-                                                    'question_form': question_form})
-    
-#При отправке формы, сохраняется загруженный файл на сервере и 
-# создается запись в бд с помощью модели File
-    def post(self, request):
-        question_form = QuestionsForm()
-        upload_form = UploadFileForm(request.POST, request.FILES)
-        if upload_form.is_valid():
-            file = upload_form.cleaned_data['file']
-            file_path = os.path.join(settings.MEDIA_ROOT, file.name)
-            
-          
-            with open(file_path, 'wb') as destination:      # Сохраняем файл на сервере
-                for chunk in file.chunks():
-                    destination.write(chunk)
-
-           
-            models.File.objects.create(name=file.name, file_path=file_path)     # Создаем запись в базе данных
-
-            return redirect('file_list')
-        return render(request, 'upload_file.html', {'upload_form': upload_form,
-                                                    'question_form': question_form})
-
-
-class CreateFolderView(View):     #создание папок
-    def get(self, request):
-        question_form = QuestionsForm()
-        create_folder_form = CreateFolderForm()
-        return render(request, 'create_folder.html', {'create_folder_form': create_folder_form,
-                                                      'question_form': question_form})
-
-    def post(self, request):
-        question_form = QuestionsForm()
-        create_folder_form = CreateFolderForm(request.POST)
-        if create_folder_form.is_valid():
-            folder_name = create_folder_form.cleaned_data['folder_name']
-            folder_path = os.path.join(settings.MEDIA_ROOT, folder_name)
-
-            # Создаем папку на сервере
-            os.makedirs(folder_path)
-
-            return redirect('file_list')
-        return render(request, 'create_folder.html', {'create_folder_form': create_folder_form,
-                                                      'question_form': question_form})

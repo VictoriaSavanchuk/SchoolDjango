@@ -1,10 +1,11 @@
 from django import forms
 from .models import Questions, AdmissionApplication
+from django.core.validators import RegexValidator
 
 class QuestionsForm(forms.ModelForm):
     name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Ваше имя'}))
     email = forms.EmailField(label='', widget=forms.EmailInput(attrs={'placeholder': 'Ваш email'}))
-    message = forms.CharField(label='', widget=forms.Textarea(attrs={'placeholder': 'Ваше сообщение'}))
+    message = forms.CharField(label='', widget=forms.Textarea(attrs={'placeholder': 'Ваши вопросы'}))
 
     class Meta:
         model = Questions
@@ -17,7 +18,11 @@ class QuestionsForm(forms.ModelForm):
         
 class AdmissionApplicationForm(forms.ModelForm):
     parent_name = forms.CharField(label=' ', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'ФИО родителя', 'class': 'form-control'}))
-    parent_contact = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Телефон родителя: +375 ХХ ХХХ ХХ ХХ', 'class': 'form-control'}))
+    # phoneNumberRegex = RegexValidator(regex = r"^(\+375|80)-(29|25|44|33)-(\d{3})(\d{2})(\d{2})$")
+    parent_contact = forms.CharField(label='', max_length=15, validators=[RegexValidator(
+        regex=r"^(\+375|80)-(29|25|44|33)-(\d{3})(\d{2})(\d{2})$",
+        message="Введите правильный номер телефона в формате +375-XX-XXXXXXX"
+    )], widget=forms.TextInput(attrs={'placeholder':'Телефон родителя +375-XX-XXXXXXX', 'class': 'form-control'}))
     student_name = forms.CharField(label='', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'ФИО ученика', 'class': 'form-control'}))
     student_class = forms.CharField(label='', max_length=50, widget=forms.TextInput(attrs={'placeholder': 'Класс', 'class': 'form-control'}))
     student_personal_data = forms.CharField(label='', max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Персональные данные ученика', 'class': 'form-control'}))
@@ -38,9 +43,3 @@ class DisplayForm(forms.Form):
     display_option = forms.ChoiceField(label='', choices=DISPLAY_CHOICES) 
 
 
-#Файловый менеджер    
-class UploadFileForm(forms.Form):
-    file = forms.FileField(label=' ', widget=forms.ClearableFileInput(attrs={'placeholder': 'Добавить файл', 'class': 'form-control'}))
-
-class CreateFolderForm(forms.Form):
-    folder_name = forms.CharField(label='', max_length=255,widget=forms.TextInput(attrs={'placeholder': 'Введите название папки', 'class': 'form-control'}))
