@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.html import format_html
+from PIL import Image
 
 # Create your models here.
 
@@ -8,6 +9,21 @@ class Blogs(models.Model):
     content = models.TextField('Содержание')
     publicationDate = models.DateField('Дата публикации', blank=True)
     image = models.ImageField('Изображение', upload_to='blog_images/')
+    
+    def save(self, *args, **kwargs):   
+        super().save(*args, **kwargs)
+
+        if self.image:
+            max_width = 600
+            max_height = 600
+
+            img = Image.open(self.image.path)
+            width, height = img.size
+
+            if width > max_width or height > max_height:
+                # Масштабирую изображение, если оно превышает максимальные размеры
+                img.thumbnail((max_width, max_height))
+                img.save(self.image.path)
     
     def __str__(self):
         return self.title
@@ -28,6 +44,21 @@ class Teachers(models.Model):
     image = models.ImageField('Изображение', upload_to='teacher_images/')
     paid_service = models.ForeignKey('PaidServices',  on_delete=models.SET_DEFAULT, related_name='teachers', verbose_name='Платные услуги',  null=True, default=None)   #related_name позволит получить всех связанных преподавателей для каждого кружка.
     
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if self.image:
+            max_width = 600
+            max_height = 600
+
+            img = Image.open(self.image.path)
+            width, height = img.size
+
+            if width > max_width or height > max_height:
+                # Масштабирую изображение, если оно превышает максимальные размеры
+                img.thumbnail((max_width, max_height))
+                img.save(self.image.path)
+                
     def __str__(self):
         return f'{self.last_name} {self.first_name}'
     
@@ -44,6 +75,21 @@ class Awards(models.Model):
     title = models.CharField('Название', max_length=100)
     description = models.TextField('Описание')
     image = models.ImageField('Изображение', upload_to='award_images/')
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if self.image:
+            max_width = 600
+            max_height = 600
+
+            img = Image.open(self.image.path)
+            width, height = img.size
+
+            if width > max_width or height > max_height:
+                # Масштабирую изображение, если оно превышает максимальные размеры
+                img.thumbnail((max_width, max_height))
+                img.save(self.image.path)
     
     def __str__(self):
         return self.title
@@ -73,6 +119,21 @@ class Licenses(models.Model):
     description = models.TextField('Описание')
     image = models.FileField('Изображение', upload_to='licenses/')
     
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if self.image:
+            max_width = 600
+            max_height = 600
+
+            img = Image.open(self.image.path)
+            width, height = img.size
+
+            if width > max_width or height > max_height:
+                # Масштабирую изображение, если оно превышает максимальные размеры
+                img.thumbnail((max_width, max_height))
+                img.save(self.image.path)
+    
     def __str__(self):
         return self.title
     
@@ -91,6 +152,21 @@ class LeadershipContacts(models.Model):
     contact_info = models.CharField('Контактная информация', max_length=100)
     image = models.ImageField('Изображение', upload_to='administration_images/')
     
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if self.image:
+            max_width = 600
+            max_height = 600
+
+            img = Image.open(self.image.path)
+            width, height = img.size
+
+            if width > max_width or height > max_height:
+                # Масштабирую изображение, если оно превышает максимальные размеры
+                img.thumbnail((max_width, max_height))
+                img.save(self.image.path)
+    
     def __str__(self):
         return f'{self.last_name} {self.first_name}'
     
@@ -104,7 +180,7 @@ class LeadershipContacts(models.Model):
         
 class AdmissionApplication(models.Model):
     parent_name = models.CharField('ФИО родителя', max_length=100)
-    parent_contact = models.CharField('Телефон родителя', max_length=100)
+    parent_contact = models.CharField('Телефон родителя', max_length=15)
     student_name = models.CharField('ФИО ученика', max_length=100)
     student_class = models.CharField('Класс', max_length=50)
     student_personal_data = models.CharField('Персональные данные ученика', max_length=150)
@@ -124,6 +200,20 @@ class PaidServices(models.Model):
     image = models.ImageField('Изображение', upload_to='circle_images/')
     category = models.ForeignKey('CategoriesPaidServices',  on_delete=models.SET_DEFAULT, verbose_name='Категория', null=True, default=None)  
     
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if self.image:
+            max_width = 600
+            max_height = 600
+
+            img = Image.open(self.image.path)
+            width, height = img.size
+
+            if width > max_width or height > max_height:
+                # Масштабирую изображение, если оно превышает максимальные размеры
+                img.thumbnail((max_width, max_height))
+                img.save(self.image.path)
     
     def __str__(self):
         return self.title
@@ -159,15 +249,3 @@ class Questions(models.Model):
         verbose_name_plural = 'Вопросы'    
         
         
-#Файловый менеджер
-class File(models.Model):
-    name = models.CharField('Имя', max_length=255)  # Название файла
-    file_path = models.FileField('Путь', upload_to='files/')  # Путь к файлу
-    created_date = models.DateTimeField('Дата создания', auto_now_add=True)  # Дата создания файла
-
-    def __str__(self):
-        return self.name
-    
-    class Meta:
-        verbose_name = 'Файл'
-        verbose_name_plural = 'Файлы'    
